@@ -152,7 +152,12 @@ RSpec.describe GramsController, type: :controller do
       #CREATE ACTION SPECS /////////////////////////////////////
   describe "grams#create action" do
     it "should require users to be logged in" do
-      post :create, params: { gram: { message: "Hello!" } }
+      post :create, params: {
+         gram: {
+            message: "Hello!",
+            picture: fixture_file_upload("/picture.png", 'image/png')
+             }
+            }
       expect(response).to redirect_to new_user_session_path
     end
 
@@ -160,7 +165,12 @@ RSpec.describe GramsController, type: :controller do
       user = FactoryBot.create(:user)
       sign_in user
 
-      post :create, params: { gram: { message: 'Hello!' } }
+      post :create, params: {
+         gram: {
+            message: 'Hello!',
+            picture: fixture_file_upload("/picture.png", 'image/png')
+             }
+            }
       expect(response).to redirect_to root_path
 
       gram = Gram.last
