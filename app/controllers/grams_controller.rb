@@ -3,7 +3,7 @@ class GramsController < ApplicationController
                                             :destroy]
 
   def index
-    @grams = Gram.all 
+    @grams = Gram.all
   end
 
   def new
@@ -56,10 +56,6 @@ class GramsController < ApplicationController
 
   def gram_params
     params.require(:gram).permit(:picture, :message)
-  end
-
-  def render_not_found
-    render plain: 'Not Found :(', status: :not_found
   end
 
   def render_not_found(status=:not_found)
